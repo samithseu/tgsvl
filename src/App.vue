@@ -18,7 +18,9 @@
         >
       </li>
       <li>
-        This Telegram bot logic managed at
+        This Telegram bot
+        <a href="tg://resolve?domain=ItsFlashyBot" target="_blank" rel="noopener">(FlashyBot)</a>
+        logic managed at
         <a
           href="https://github.com/samithseu/tgsvl/tree/main/tgcloud"
           target="_blank"
