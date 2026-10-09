@@ -1,5 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 :root {
-  --clr-primary: #24a2e0;
+  --clr-primary: light-dark(#24a2e0, #00aaff);
+  --clr-background: light-dark(#f0f0f0, black);
+  --font-sans:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Geist Mono", monospace;
 }
 
 * {
@@ -10,4 +16,58 @@
 
 html {
   color-scheme: light dark;
+  font-family: var(--font-sans);
+  background-color: var(--clr-background);
+}
+
+.container {
+  --space-size: 2.5rem;
+  width: fit-content;
+  max-inline-size: min(620px, calc(100% - calc(var(--space-size) * 2)));
+  margin-inline: auto;
+  margin-block: var(--space-size);
+
+  & > *:not(:last-child) {
+    margin-block-end: 2rem;
+
+    @media screen and (width >= 620px) {
+      margin-block-end: 1.5rem;
+    }
+  }
+
+  & h1 {
+    font-weight: 700;
+  }
+
+  & img {
+    aspect-ratio: initial;
+    width: 2rem;
+    margin-inline-end: 0.3rem;
+    vertical-align: middle;
+  }
+
+  & ul {
+    padding-inline-start: 1rem;
+
+    & li {
+      font-weight: 400;
+    }
+
+    & > *:not(:last-child) {
+      margin-block-end: 1rem;
+
+      @media screen and (width >= 620px) {
+        margin-block-end: 0.5rem;
+      }
+    }
+
+    & a {
+      font-family: var(--font-mono);
+      color: var(--clr-primary);
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
