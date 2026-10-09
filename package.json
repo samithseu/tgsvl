@@ -12,7 +12,7 @@
     "lint": "run-s \"lint:*\"",
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
-    "deploy": "npm run build && tgcloud push"
+    "deploy": "pnpm run build && tgcloud push"
   },
   "dependencies": {
     "vue": "^3.5.42"
