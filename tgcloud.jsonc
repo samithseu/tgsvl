@@ -3,6 +3,6 @@
     "source": "dist",
     "spa": true,
     "immutable": ["/assets/*"],
-    "headers": [{ "path": "/*", "set": { "Referrer-Policy": "no-referrer" } }]
-  }
+    "headers": [{ "path": "/*", "set": { "Referrer-Policy": "no-referrer" } }],
+  },
 }

@@ -21,15 +21,15 @@ in this project.
 Everything the platform runs lives in the **`tgcloud/`** folder. The rest of the
 project root is yours (a mini-app front-end, config, docs).
 
-| Path                  | What it is                                                        |
-|-----------------------|-------------------------------------------------------------------|
-| `tgcloud/schema.js`   | Database schema — tables as **named exports**. One file.          |
-| `tgcloud/lib/`        | Shared modules. Subdirectories allowed (`lib/internal/util.js`).  |
-| `tgcloud/handlers/`   | Update handlers, **one level only**. Names match Telegram Bot API update types (`message`, `callback_query`, …). |
-| `tgcloud/endpoints/`  | Functions the Mini App calls (`POST /api/<name>`), **one level only**. |
-| `tgcloud.jsonc`       | Project config. Its `"static"` block names the build folder hosted as the Mini App. |
-| `docs/`               | Reference docs (this project's, for you). Not deployed.           |
-| `.tgcloud/`           | CLI state (credentials, snapshot, cached layout). **Never edit or read from here** — it's gitignored machine state. |
+| Path                 | What it is                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `tgcloud/schema.js`  | Database schema — tables as **named exports**. One file.                                                            |
+| `tgcloud/lib/`       | Shared modules. Subdirectories allowed (`lib/internal/util.js`).                                                    |
+| `tgcloud/handlers/`  | Update handlers, **one level only**. Names match Telegram Bot API update types (`message`, `callback_query`, …).    |
+| `tgcloud/endpoints/` | Functions the Mini App calls (`POST /api/<name>`), **one level only**.                                              |
+| `tgcloud.jsonc`      | Project config. Its `"static"` block names the build folder hosted as the Mini App.                                 |
+| `docs/`              | Reference docs (this project's, for you). Not deployed.                                                             |
+| `.tgcloud/`          | CLI state (credentials, snapshot, cached layout). **Never edit or read from here** — it's gitignored machine state. |
 
 Only `.js` files under `tgcloud/` (`schema.js`, `lib/`, `handlers/`, `endpoints/`) are deployed
 as code, plus — when `tgcloud.jsonc` names one — the front-end's build folder as
@@ -93,7 +93,7 @@ itself: the database, the Bot API, secrets.
   - ✅ `import { db, api, fetch } from 'sdk'` / `import { eq, sql } from 'sdk/db'`
   - ❌ `import { users } from '../schema'` → a relative import must end in `.js`
   - ❌ `import x from '../../src/x.js'` → nothing outside `tgcloud/` is reachable
-  - A module's *name* is its path inside `tgcloud/` without `.js` (`lib/cart`);
+  - A module's _name_ is its path inside `tgcloud/` without `.js` (`lib/cart`);
     `tgcloud run` takes it, and `from 'lib/cart'` (no extension) also resolves —
     but write relative imports.
 - **No filesystem, no npm packages** at runtime. Only `sdk` (and its submodules
@@ -103,7 +103,7 @@ itself: the database, the Bot API, secrets.
   `Message` (i.e. `update.message`), for `handlers/callback_query` the
   `CallbackQuery`, and so on. The full `Update` (with `update_id`) is on the
   second argument: `ctx.update`. An endpoint's `export default` gets
-  `(input, ctx)` — see *Endpoints* above.
+  `(input, ctx)` — see _Endpoints_ above.
 
 ## Platform SDK (`import … from 'sdk'`)
 
@@ -113,7 +113,7 @@ itself: the database, the Bot API, secrets.
   failure (`import { BotApiError } from 'sdk'`; it has `.code`/`.description`/`.parameters`).
 - **`fetch`** — outbound HTTP, web-`fetch`-like (`res.status/ok`, `res.json()`,
   `res.text()`, streaming via `for await`, redirects followed).
-- **`EndpointError`** — the one way an endpoint refuses a call (see *Endpoints*).
+- **`EndpointError`** — the one way an endpoint refuses a call (see _Endpoints_).
 
 ## Database — the rules that bite
 
@@ -125,7 +125,7 @@ Full API in [docs/tgcloud-sdk.md](docs/tgcloud-sdk.md). The non-obvious parts:
   — the runtime runs with FKs off, so they'd be silently inert. Enforce integrity
   in application code (delete children before parents, etc.).
 - **Drops happen only via `.deprecated('reason')`** on a column/table/index.
-  Deleting the declaration does *not* drop anything.
+  Deleting the declaration does _not_ drop anything.
 - **Type changes aren't automatic** — do them by hand with `db.run(...)`.
 
 ## Deploy & migrate workflow
@@ -145,7 +145,7 @@ npx tgcloud login      # link this project to a bot
 npx tgcloud webhook    # show the bot's webhook and whether it matches your handlers
 ```
 
-After you change `tgcloud/schema.js`, `push` reports what the DB *would* change but applies
+After you change `tgcloud/schema.js`, `push` reports what the DB _would_ change but applies
 nothing — run `npx tgcloud migrate` to actually apply it.
 
 The platform manages the bot's webhook for you, derived from your deployed

@@ -4,7 +4,5 @@ export const messages = table("messages", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   chatId: integer("chat_id").notNull(),
   text: text("text"),
-  created: integer("created_at", { mode: "timestamp" }).default(
-    sql`(unixepoch())`,
-  ),
+  created: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
 });

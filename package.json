@@ -1,15 +1,17 @@
 {
   "name": "tgsvl",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "deploy": "pnpm run build && tgcloud push"
+    "dev": "vp dev",
+    "build": "tsc && vp build",
+    "deploy": "vpr build && tgcloud push",
+    "prepare": "vp config"
   },
   "devDependencies": {
     "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   }
 }
